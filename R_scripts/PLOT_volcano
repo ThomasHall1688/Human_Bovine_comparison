@@ -1,0 +1,41 @@
+########## Volcano plot  ##########
+#Volcano plots from the package enhancedvolcano. I prefer the user control of these. 
+
+if (!requireNamespace("BiocManager", quietly = TRUE)) 
+install.packages("BiocManager")
+BiocManager::install("EnhancedVolcano")
+library(EnhancedVolcano)
+
+#Labels for top genes 
+HAM_24hpi_DE_genes <- HAM_24hpi_DE_genes[order(HAM_24hpi_DE_genes$FDR),]
+HAM_24hpi_DE_genes_topten <- HAM_24hpi_DE_genes[c(1:10),]
+
+MDM_24hpi_DE_genes <- MDM_24hpi_DE_genes[order(MDM_24hpi_DE_genes$FDR),]
+MDM_24hpi_DE_genes_topten <- MDM_24hpi_DE_genes[c(1:10),]
+
+MB_24hpi_DE_genes <- MB_24hpi_DE_genes[order(MB_24hpi_DE_genes$FDR),]
+MB_24hpi_DE_genes_topten <- MB_24hpi_DE_genes[c(1:10),]
+
+TB_24hpi_DE_genes <- TB_24hpi_DE_genes[order(TB_24hpi_DE_genes$FDR),]
+TB_24hpi_DE_genes_topten <- TB_24hpi_DE_genes[c(1:10),]
+
+
+EnhancedVolcano(toptable = data.frame(HAM_24hpi_DE_genes), lab = HAM_24hpi_DE_genes$Gene_ID, selectLab = HAM_24hpi_DE_genes_topten$Gene_ID, x = "log2FoldChange", y = "FDR", pCutoff = 5e-2, 
+                col=c("#666666", "#666666", "#4d94ff", "#ff3333"), colAlpha = 0.8, FCcutoff = 1, transcriptPointSize = 2, 
+                transcriptLabSize = 3, title = "hAM infected with TB at 24hpi",xlim = c(-6, 6), ylim = c(0, -log10(10e-61)), 
+                legend=c("NS", "", "FDR", "Log2FC & FDR "), border = "full", gridlines.major = FALSE, gridlines.minor = FALSE, borderColour = "#4d4d4d")
+				
+EnhancedVolcano(toptable = data.frame(MDM_24hpi_DE_genes), lab = MDM_24hpi_DE_genes$Gene_ID, selectLab = MDM_24hpi_DE_genes_topten$Gene_ID, x = "log2FoldChange", y = "FDR", pCutoff = 5e-2, 
+                col=c("#666666", "#666666", "#4d94ff", "#ff3333"), colAlpha = 0.8, FCcutoff = 1, transcriptPointSize = 2, 
+                transcriptLabSize = 3, title = "hMDM infected with TB at 24hpi",xlim = c(-12, 12), ylim = c(0, -log10(10e-103)), 
+                legend=c("NS", "", "FDR", "Log2FC & FDR "), border = "full", gridlines.major = FALSE, gridlines.minor = FALSE, borderColour = "#4d4d4d")
+								
+EnhancedVolcano(toptable = data.frame(MB_24hpi_DE_genes), lab = MB_24hpi_DE_genes$Gene_ID, selectLab = MB_24hpi_DE_genes_topten$Gene_ID, x = "log2FoldChange", y = "FDR", pCutoff = 5e-2, 
+                col=c("#666666", "#666666", "#4d94ff", "#ff3333"), colAlpha = 0.8, FCcutoff = 1, transcriptPointSize = 2, 
+                transcriptLabSize = 3, title = "bAM infected with MB at 24hpi",xlim = c(-8, 8), ylim = c(0, -log10(10e-23)), 
+                legend=c("NS", "", "FDR", "Log2FC & FDR "), border = "full", gridlines.major = FALSE, gridlines.minor = FALSE, borderColour = "#4d4d4d")
+				
+EnhancedVolcano(toptable = data.frame(TB_24hpi_DE_genes), lab = TB_24hpi_DE_genes$Gene_ID, selectLab = TB_24hpi_DE_genes_topten$Gene_ID, x = "log2FoldChange", y = "FDR", pCutoff = 5e-2, 
+                col=c("#666666", "#666666", "#4d94ff", "#ff3333"), colAlpha = 0.8, FCcutoff = 1, transcriptPointSize = 2, 
+                transcriptLabSize = 3, title = "bAM infected with TB at 24hpi",xlim = c(-7, 7), ylim = c(0, -log10(10e-16)), 
+                legend=c("NS", "", "FDR", "Log2FC & FDR "), border = "full", gridlines.major = FALSE, gridlines.minor = FALSE, borderColour = "#4d4d4d")
